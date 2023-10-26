@@ -47,6 +47,11 @@ class NOXCHIME:
         return {
             "required": {
                 "image": ("IMAGE",),
+                "playsound": (["enable", "disable"],),
+                "soundPath": ("STRING", {
+                    "multiline": False,
+                    "default": 'C:\Windows\Media\chimes.wav'
+                }),
             },
         }
 
@@ -59,9 +64,18 @@ class NOXCHIME:
 
     CATEGORY = "NoxinNodes"
 
-    def test(self, image):
-        import winsound
-        winsound.PlaySound("SystemHand", winsound.SND_ALIAS)
+    def test(self, image, playsound, soundPath):
+        if playsound == "enable": 
+            #import winsound
+            #winsound.PlaySound("SystemHand", winsound.SND_ALIAS)
+            
+            import subprocess, os, platform
+            if platform.system() == 'Darwin':       # macOS
+                subprocess.call(('open', soundPath))
+            elif platform.system() == 'Windows':    # Windows
+                os.startfile(soundPath)
+            else:                                   # linux variants
+                subprocess.call(('xdg-open', soundPath))
         
         return (image,)
 

@@ -55,8 +55,8 @@ class NOXSCALEDRES:
             },
         }
 
-    RETURN_TYPES = ("INT","INT")
-    RETURN_NAMES = ("WIDTH","HEIGHT",)
+    RETURN_TYPES = ("INT","INT","INT","INT")
+    RETURN_NAMES = ("WIDTH","HEIGHT","RAW_WIDTH","RAW_HEIGHT")
 
     FUNCTION = "main"
 
@@ -68,14 +68,14 @@ class NOXSCALEDRES:
         finalWidth = 0
         finalHeight = 0
         if SDXL_MODE == "off":
-            finalWidth = SD15_WIDTH
-            finalHeight = SD15_HEIGHT
+            targetWidth = SD15_WIDTH
+            targetHeight = SD15_HEIGHT
         else:
-            finalWidth = SDXL_WIDTH
-            finalHeight = SDXL_HEIGHT        
+            targetWidth = SDXL_WIDTH
+            targetHeight = SDXL_HEIGHT        
             
-        finalWidth = int(finalWidth * UPSCALEFACTOR)
-        finalHeight = int(finalHeight * UPSCALEFACTOR)
+        finalWidth = int(targetWidth * UPSCALEFACTOR)
+        finalHeight = int(targetHeight * UPSCALEFACTOR)
         
         print("Running scaled node")
-        return (finalWidth,finalHeight,)
+        return (finalWidth,finalHeight,targetWidth,targetHeight)

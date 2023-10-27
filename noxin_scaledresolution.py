@@ -55,8 +55,8 @@ class NOXSCALEDRES:
             },
         }
 
-    RETURN_TYPES = ("INT","INT","INT","INT")
-    RETURN_NAMES = ("WIDTH","HEIGHT","RAW_WIDTH","RAW_HEIGHT")
+    RETURN_TYPES = ("INT","INT","INT","INT","FLOAT")
+    RETURN_NAMES = ("WIDTH","HEIGHT","RAW_WIDTH","RAW_HEIGHT","UPSCALEFACTOR")
 
     FUNCTION = "main"
 
@@ -78,4 +78,4 @@ class NOXSCALEDRES:
         finalHeight = int(targetHeight * UPSCALEFACTOR)
         
         print("Running scaled node")
-        return (finalWidth,finalHeight,targetWidth,targetHeight)
+        return (finalWidth,finalHeight,targetWidth,targetHeight, UPSCALEFACTOR)

@@ -22,7 +22,7 @@ class NoxinPromptSave:
     def main(self, newprompt, saveprompt, librarynum):      
         outStr = newprompt
         
-        if saveprompt == "on" and newprompt != "":   
+        if saveprompt == "on" and newprompt != "" and newprompt != "Empty Library":   
             libraryFile = "promptlibrary" + str(librarynum) + ".txt"
             
             import os

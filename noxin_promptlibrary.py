@@ -1,4 +1,20 @@
-class NOXCHIME:
+import os
+my_dir = os.path.dirname(os.path.abspath(__file__))  
+
+def getPrompts(libFileName):  
+    library_path = os.path.join(my_dir, 'library')  
+    library_path = os.path.join(library_path, libFileName)  
+    lines = open(library_path, "r").read().splitlines()
+    if len(lines) == 0:
+        return ["Empty Library"]
+    else:
+        return lines
+
+def getLibraries():
+    library_path = os.path.join(my_dir, 'library')    
+    return os.listdir(library_path)       
+
+class NOXPROMPTLIB_LOAD:
     """
     A example node
 
@@ -25,9 +41,11 @@ class NOXCHIME:
         The entry point method. The name of this method must be the same as the value of property `FUNCTION`.
         For example, if `FUNCTION = "execute"` then this method's name must be `execute`, if `FUNCTION = "foo"` then it must be `foo`.
     """
+
+    
     def __init__(self):
         pass
-    
+        
     @classmethod
     def INPUT_TYPES(s):
         """
@@ -44,37 +62,48 @@ class NOXCHIME:
                         + First value is a string indicate the type of field or a list for selection.
                         + Secound value is a config for type "INT", "STRING" or "FLOAT".
         """
+
+        #print("lines: " + lines[2])
+                    
+        
         return {
             "required": {
-                "image": ("IMAGE",),
-                "playsound": (["enable", "disable"],),
-                "soundPath": ("STRING", {
-                    "multiline": False,
-                    "default": 'C:\Windows\Media\chimes.wav'
-                }),
+                #"libraries": (getLibraries(),),
+                "prompt1": (getPrompts('promptlibrary1.txt'),),
+                "prompt2": (getPrompts('promptlibrary2.txt'),),
+                "prompt3": (getPrompts('promptlibrary3.txt'),),
+                "prompt4": (getPrompts('promptlibrary4.txt'),),
+                "prompt5": (getPrompts('promptlibrary5.txt'),),
+                "prompt6": (getPrompts('promptlibrary6.txt'),),
+                "selectedlibrary": ("INT", {"default": 1, "min": 1, "max": 6, "step": 1}),
             },
         }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("STRING",)
     #RETURN_NAMES = ("image_output_name",)
 
-    FUNCTION = "test"
+    FUNCTION = "main"
 
     #OUTPUT_NODE = False
 
     CATEGORY = "NoxinNodes"
+    
 
-    def test(self, image, playsound, soundPath):
-        if playsound == "enable": 
-            #import winsound
-            #winsound.PlaySound("SystemHand", winsound.SND_ALIAS)
-            
-            import subprocess, os, platform
-            if platform.system() == 'Darwin':       # macOS
-                subprocess.call(('open', soundPath))
-            elif platform.system() == 'Windows':    # Windows
-                os.startfile(soundPath)
-            else:                                   # linux variants
-                subprocess.call(('xdg-open', soundPath))
-        
-        return (image,)
+
+    def main(self, selectedlibrary, prompt1, prompt2, prompt3, prompt4, prompt5, prompt6):
+        if selectedlibrary == 1:
+            outStr = prompt1  
+        elif selectedlibrary == 2:
+            outStr = prompt2
+        elif selectedlibrary == 3:
+            outStr = prompt3
+        elif selectedlibrary == 4:
+            outStr = prompt4
+        elif selectedlibrary == 5:
+            outStr = prompt5
+        elif selectedlibrary == 6:
+            outStr = prompt6
+        else:
+            print("Not sure how we got here, but selectedlibrary number wasn't in the allowed space. using lib 1")
+            outStr = prompt1
+        return (outStr,)

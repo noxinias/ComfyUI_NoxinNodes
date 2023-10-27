@@ -1,4 +1,4 @@
-class NOXCHIME:
+class NOXPROMPTLIB_SAVE:
     """
     A example node
 
@@ -44,37 +44,44 @@ class NOXCHIME:
                         + First value is a string indicate the type of field or a list for selection.
                         + Secound value is a config for type "INT", "STRING" or "FLOAT".
         """
+        
         return {
             "required": {
-                "image": ("IMAGE",),
-                "playsound": (["enable", "disable"],),
-                "soundPath": ("STRING", {
-                    "multiline": False,
-                    "default": 'C:\Windows\Media\chimes.wav'
-                }),
+                "newprompt": ("STRING", {"default": "","multiline": True}),
+                "librarynum": ("INT", {"default": 1, "min": 1, "max": 6, "step": 1}),
+                "saveprompt": (["on", "off"], ),
             },
         }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("STRING",)
     #RETURN_NAMES = ("image_output_name",)
 
-    FUNCTION = "test"
+    FUNCTION = "main"
 
     #OUTPUT_NODE = False
 
     CATEGORY = "NoxinNodes"
 
-    def test(self, image, playsound, soundPath):
-        if playsound == "enable": 
-            #import winsound
-            #winsound.PlaySound("SystemHand", winsound.SND_ALIAS)
-            
-            import subprocess, os, platform
-            if platform.system() == 'Darwin':       # macOS
-                subprocess.call(('open', soundPath))
-            elif platform.system() == 'Windows':    # Windows
-                os.startfile(soundPath)
-            else:                                   # linux variants
-                subprocess.call(('xdg-open', soundPath))
+    def main(self, newprompt, saveprompt, librarynum):      
+        outStr = newprompt
+        #print("SavePrompt running...")
         
-        return (image,)
+        if saveprompt == "on" and newprompt != "":   
+            libraryFile = "promptlibrary" + str(librarynum) + ".txt"
+            
+            #print("A prompt was recieved...")
+            import os
+            my_dir = os.path.dirname(os.path.abspath(__file__))  
+            library_path = os.path.join(my_dir, 'library')
+            library_path = os.path.join(library_path, libraryFile)        
+            lines = open(library_path, "r").read().splitlines()
+            
+            if newprompt in lines:
+                print("Noxin Prompt Save: Prompt already exists")
+            else:
+                print("Noxin Prompt Save: Adding new prompt")
+                f = open(library_path, "a+")
+                f.write(newprompt + "\n")
+                f.close()               
+                
+        return (outStr,)

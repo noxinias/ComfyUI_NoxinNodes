@@ -10,3 +10,7 @@ I am aware of the security potential of running it via operating system subproce
 noxin_scaledresolution:
 
 This node provides both raw and multiplied values of height and width, with a built in switch for SD1.5 and SDXL - I hated having to multiply them with multiple nodes and convert between floats and ints.
+
+noxin_promptlibrary + noxin_saveprompt:
+
+Allows you to read from library text files in this folder from a single node, as well as save any non-existing prompts into that library via the save node. Try out the attached workflows for an example of use.

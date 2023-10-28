@@ -12,10 +12,15 @@ noxin_scaledresolution:
 noxin_promptlibrary + noxin_saveprompt:
 	Allows you to read from library text files in this folder from a single node, as well as save any non-existing prompts into that library via the save node. Try out the attached workflows for an example of use.
 
+noxin_splitprompt:
+	Organises the various pieces of your prompt into seperate sections and combines them according to the order string - I like it so I can quickly change just one element without hunting through test.
+
+noxin_simplemath:
+	does simple math and conversion things, takes in two ints, two floats and two strings, lets you add, subtract, multiply and divide (no error protection, watch those 0s) any pair, outputs to all three types. If you just want to do a conversion pass your value through with an add 0 operation.
+
 Installation:
 	To install this in your comfyui instance - navigate to the ComfyUI\custom_nodes folder, and either unzip or git clone this repo with command: git clone https://github.com/noxinias/ComfyUI_NoxinNodes.git
-	
-	Alternatively: Go to the code button at top, download as zip and place in the same location. The structure should look like ComfyUI\custom_nodes\ComfyUI_NoxinNodes\__init__.py (and other files)
+	Alternatively you can go to the code button at top, download as zip and place in the same location. The structure should look like ComfyUI\custom_nodes\ComfyUI_NoxinNodes\__init__.py (and other files)
 	
 Volitile Warning:
 	I only just started making comfyui nodes, so there will be many updates as I figure out how to do things better. If you don't want to risk updates breaking your established workflow (basically replacing my nodes again) - You can delete the .git folder after install, to prevent auto-updates.

@@ -21,8 +21,8 @@ class NoxinSplitPrompt:
             },
         }
 
-    RETURN_TYPES = ("STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING",)
-    RETURN_NAMES = ("loraword", "subject", "clothing", "setting", "photography", "face", "default_positive","specific_negative","default_negative","Combo+", "Combo-",)
+    RETURN_TYPES = ("STRING"  ,"STRING"  ,"STRING"   ,"STRING"  ,"STRING"      ,"STRING","STRING"           ,"STRING"           ,"STRING"          ,"STRING","STRING",)
+    RETURN_NAMES = ("loraword", "subject", "clothing", "setting", "photography", "face" , "default_positive","specific_negative","default_negative","Combo+", "Combo-",)
 
     FUNCTION = "main"
     CATEGORY = "NoxinNodes"
@@ -52,6 +52,7 @@ class NoxinSplitPrompt:
         postivePrompt = fullPrompt
         negativePrompt = specific_negative + delim + default_negative
 
-        print("Combined Prompt: " + fullPrompt)
+        print("Combined Prompt+: " + postivePrompt)
+        print("Combined Prompt-: " + negativePrompt)
 
-        return (loraword, subject, clothing, setting, photography, face, default_positive, specific_negative, default_negative,fullPrompt,negativePrompt)
+        return (loraword, subject, clothing, setting, photography, face, default_positive, specific_negative, default_negative, postivePrompt, negativePrompt)

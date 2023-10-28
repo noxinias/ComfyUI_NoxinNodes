@@ -13,7 +13,7 @@ class NoxinScaledResolution:
                 "SDXL_WIDTH": ("INT", {"default": 1024}),
                 "SDXL_HEIGHT": ("INT", {"default": 1024}),
                 "SDXL_MODE": (["off", "on"], ),
-                "UPSCALEFACTOR": ("FLOAT", {"default": 2.0}),
+                "UPSCALEFACTOR": ("FLOAT", {"round": "False", "default": 2.0}),
             },
         }
 

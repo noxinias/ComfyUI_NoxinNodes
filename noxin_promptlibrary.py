@@ -30,30 +30,30 @@ class NoxinPromptLoad:
                 "prompt4": (getPrompts('promptlibrary4.txt'),{"default": ""}),
                 "prompt5": (getPrompts('promptlibrary5.txt'),{"default": ""}),
                 "prompt6": (getPrompts('promptlibrary6.txt'),{"default": ""}),
-                "selectedlibrary": ("INT", {"default": 1, "min": 1, "max": 6, "step": 1}),
             },
         }
 
-    RETURN_TYPES = ("STRING",)
+    RETURN_TYPES = ("STRING" ,"STRING"  ,"STRING"  ,"STRING"  ,"STRING"  ,"STRING",)
+    RETURN_NAMES = ("prompt1", "prompt2", "prompt3", "prompt4", "prompt5", "prompt6",)
     
     FUNCTION = "main"
     CATEGORY = "NoxinNodes"   
 
 
-    def main(self, selectedlibrary, prompt1, prompt2, prompt3, prompt4, prompt5, prompt6):
-        if selectedlibrary == 1:
-            outStr = prompt1  
-        elif selectedlibrary == 2:
-            outStr = prompt2
-        elif selectedlibrary == 3:
-            outStr = prompt3
-        elif selectedlibrary == 4:
-            outStr = prompt4
-        elif selectedlibrary == 5:
-            outStr = prompt5
-        elif selectedlibrary == 6:
-            outStr = prompt6
-        else:
-            print("Not sure how we got here, but selectedlibrary number wasn't in the allowed space. using lib 1")
-            outStr = prompt1
-        return (outStr,)
+    def main(self, prompt1, prompt2, prompt3, prompt4, prompt5, prompt6):
+        placeholderStr = "Empty Library"
+    
+        if prompt1 == placeholderStr:
+            prompt1 = ""    
+        if prompt2 == placeholderStr:
+            prompt2 = ""    
+        if prompt3 == placeholderStr:
+            prompt3 = ""    
+        if prompt4 == placeholderStr:
+            prompt4 = ""    
+        if prompt5 == placeholderStr:
+            prompt5 = ""    
+        if prompt6 == placeholderStr:
+            prompt6 = ""  
+            
+        return (prompt1, prompt2, prompt3, prompt4, prompt5, prompt6,)

@@ -44,7 +44,7 @@ class NoxinSplitPrompt:
             sectionIndex = sectionNames.index(sectionName)
             sectionData = sections[sectionIndex]
             fullPrompt = fullPrompt + sectionData
-            if ind < len(orderstring)-1:
+            if ind < len(orderstring)-1 and sectionData != "":
                 fullPrompt = fullPrompt + delim
 
             ind = ind + 1
